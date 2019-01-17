@@ -76,3 +76,7 @@ C:\Users\and\source\repos\ExpensesAPI\ExpensesAPI\obj\Debug\ExpensesAPI.csproj.C
 C:\Users\and\source\repos\ExpensesAPI\ExpensesAPI\obj\Debug\ExpensesAPI.dll
 C:\Users\and\source\repos\ExpensesAPI\ExpensesAPI\obj\Debug\ExpensesAPI.pdb
 C:\Users\and\source\repos\ExpensesAPI\ExpensesAPI\bin\Newtonsoft.Json.pdb
+C:\Users\and\source\repos\ExpensesAPI\ExpensesAPI\bin\EntityFramework.dll
+C:\Users\and\source\repos\ExpensesAPI\ExpensesAPI\bin\EntityFramework.SqlServer.dll
+C:\Users\and\source\repos\ExpensesAPI\ExpensesAPI\bin\EntityFramework.xml
+C:\Users\and\source\repos\ExpensesAPI\ExpensesAPI\bin\EntityFramework.SqlServer.xml

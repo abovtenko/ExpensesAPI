@@ -6,25 +6,14 @@ using System.Net.Http;
 using System.Web.Http;
 using ExpensesAPI.Models;
 using Newtonsoft.Json;
+using ExpensesAPI.Data;
 
 namespace ExpensesAPI.Controllers
 {
     [RoutePrefix("api/transactions")]
     public class TransactionController : ApiController
     {
-
-        List<Transaction> transactions = new List<Transaction>
-        {
-            new Transaction
-            {
-                TransactionID = 1,
-                UserID = 1,
-                TransactionDate = "2019-09-09",
-                Description = "",
-                CreditAmount = 0,
-                DebitAmount = 12.67
-            }
-        };
+        private readonly ExpensesContext _context = new ExpensesContext();
 
         [HttpPost]
         [Route("")]
@@ -32,8 +21,10 @@ namespace ExpensesAPI.Controllers
         {
             if (ModelState.IsValid)
             {
-                transactions.Add(model);
-                return Request.CreateResponse(HttpStatusCode.Created,  JsonConvert.SerializeObject(model));
+                _context.Transactions.Add(model);
+                var content = new { location = $"{Request.RequestUri.Host}/api/transactions/{model.TransactionID}" };
+
+                return Request.CreateResponse(HttpStatusCode.Created, JsonConvert.SerializeObject(content));
             }
 
             return Request.CreateResponse(HttpStatusCode.BadRequest);
@@ -46,7 +37,7 @@ namespace ExpensesAPI.Controllers
         {
             if (ModelState.IsValid)
             {
-                var target = transactions.Where(x => x.TransactionID == model.TransactionID).SingleOrDefault();
+                var target = _context.Transactions.Where(x => x.TransactionID == model.TransactionID).SingleOrDefault();
                 if (target == null)
                 {
                     return Request.CreateResponse(HttpStatusCode.NotFound);
@@ -57,8 +48,9 @@ namespace ExpensesAPI.Controllers
                 target.Description = model.Description;
                 target.CreditAmount = model.CreditAmount;
                 target.DebitAmount = model.DebitAmount;
+                var content = new { location = $"{Request.RequestUri.Host}/api/transactions/{model.TransactionID }" };
 
-                return Request.CreateErrorResponse(HttpStatusCode.OK, JsonConvert.SerializeObject(target));
+                return Request.CreateResponse(HttpStatusCode.OK, JsonConvert.SerializeObject(content));
             }
 
             return Request.CreateResponse(HttpStatusCode.BadRequest);
@@ -69,20 +61,20 @@ namespace ExpensesAPI.Controllers
         [Route("{id}")]
         public HttpResponseMessage Delete(int id)
         {
-            var target = transactions.Where(x => x.TransactionID == id).SingleOrDefault();
+            var target = _context.Transactions.Where(x => x.TransactionID == id).SingleOrDefault();
             if (target == null)
             {
                 return Request.CreateResponse(HttpStatusCode.NotFound);
             }
 
-            transactions.Remove(target);
+            _context.Transactions.Remove(target);
             return Request.CreateResponse(HttpStatusCode.OK);
         }
 
         [Route("{id}")]
         public HttpResponseMessage Get(int id)
         {
-            var result = transactions.Where(x => x.TransactionID == id).SingleOrDefault();
+            var result = _context.Transactions.Where(x => x.TransactionID == id).SingleOrDefault();
             if (result == null)
             {
                 return Request.CreateResponse(HttpStatusCode.NotFound);
@@ -95,7 +87,9 @@ namespace ExpensesAPI.Controllers
         [Route("")]
         public HttpResponseMessage GetAll()
         {
-            var response = Request.CreateResponse(HttpStatusCode.OK, JsonConvert.SerializeObject(transactions));
+            var result = _context.Transactions.ToList();
+            var response = Request.CreateResponse(HttpStatusCode.OK, JsonConvert.SerializeObject(result));
+
             return response;
         }
     }

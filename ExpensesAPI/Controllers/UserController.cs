@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using ExpensesAPI.Data;
 using ExpensesAPI.Models;
 using Newtonsoft.Json;
 
@@ -12,27 +13,7 @@ namespace ExpensesAPI.Controllers
     [RoutePrefix("api/users")]
     public class UserController : ApiController
     {
-        List<Transaction> transactions = new List<Transaction>
-        {
-            new Transaction
-            {
-                TransactionID = 1,
-                UserID = 1,
-                TransactionDate = "2019-09-09",
-                Description = "",
-                CreditAmount = 0,
-                DebitAmount = 12.67
-            }
-        };
-
-        List<User> users = new List<User>
-        {
-            new User
-            {
-                UserID = 1,
-                Username = "firstUser"
-            }
-        };
+        private readonly ExpensesContext _context = new ExpensesContext();
 
         [HttpPost]
         [Route("")]
@@ -40,8 +21,10 @@ namespace ExpensesAPI.Controllers
         {
             if (ModelState.IsValid)
             {
-                users.Add(model);
-                return Request.CreateResponse(HttpStatusCode.Created, JsonConvert.SerializeObject(model));
+                _context.Users.Add(model);
+                var content = new { location = $"{Request.RequestUri.Host}/api/users/{model.UserID}"};
+
+                return Request.CreateResponse(HttpStatusCode.Created, JsonConvert.SerializeObject(content));
             }
 
             return Request.CreateResponse(HttpStatusCode.BadRequest);
@@ -54,15 +37,16 @@ namespace ExpensesAPI.Controllers
         {
             if (ModelState.IsValid)
             {
-                var toModify = users.Where(x => x.UserID == model.UserID).SingleOrDefault();
-                if (toModify == null)
+                var target = _context.Users.Where(x => x.UserID == model.UserID).SingleOrDefault();
+                if (target == null)
                 {
                     return Request.CreateResponse(HttpStatusCode.NotFound);
                 }
 
-                toModify.Username = model.Username;
+                target.Username = model.Username;
+                var content = new { location = $"{Request.RequestUri.Host}/api/users/{model.UserID}" };
 
-                return Request.CreateErrorResponse(HttpStatusCode.OK, JsonConvert.SerializeObject(toModify));
+                return Request.CreateResponse(HttpStatusCode.OK, JsonConvert.SerializeObject(content));
             }
 
             return Request.CreateResponse(HttpStatusCode.BadRequest);
@@ -72,20 +56,20 @@ namespace ExpensesAPI.Controllers
         [Route("{id}")]
         public HttpResponseMessage Delete(int id)
         {
-            var toDelete = users.Where(x => x.UserID == id).SingleOrDefault();
-            if (toDelete == null)
+            var target = _context.Users.Where(x => x.UserID == id).SingleOrDefault();
+            if (target == null)
             {
                 return Request.CreateResponse(HttpStatusCode.NotFound);
             }
 
-            users.Remove(toDelete);
+            _context.Users.Remove(target);
             return Request.CreateResponse(HttpStatusCode.OK);
         }
 
         [Route("{id}")]
         public HttpResponseMessage Get(int id)
         {
-            var result = users.Where(x => x.UserID == id).SingleOrDefault();
+            var result = _context.Users.Where(x => x.UserID == id).SingleOrDefault();
             if (result == null)
             {
                 return Request.CreateResponse(HttpStatusCode.NotFound);
@@ -99,21 +83,24 @@ namespace ExpensesAPI.Controllers
         [Route("{id}/transactions")]
         public HttpResponseMessage GetTransactions(int id)
         {
-            var user = users.Where(x => x.UserID == id).SingleOrDefault();
+            var user = _context.Users.Where(x => x.UserID == id).SingleOrDefault();
             if (user == null)
             {
                 return Request.CreateResponse(HttpStatusCode.NotFound);
             }
 
-            var result = transactions.Where(x => x.UserID == user.UserID);
+            var result = _context.Transactions.Where(x => x.UserID == user.UserID);
             var response = Request.CreateResponse(HttpStatusCode.OK, JsonConvert.SerializeObject(result));
+
             return response;
         }
 
         [Route("")]
         public HttpResponseMessage GetAll()
         {
-            var response = Request.CreateResponse(HttpStatusCode.OK, JsonConvert.SerializeObject(users));
+            var result = _context.Users.ToList();
+            var response = Request.CreateResponse(HttpStatusCode.OK, JsonConvert.SerializeObject(result));
+
             return response;
         }
     }

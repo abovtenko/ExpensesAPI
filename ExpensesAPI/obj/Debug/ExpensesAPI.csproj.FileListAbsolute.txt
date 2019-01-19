@@ -80,3 +80,6 @@ C:\Users\and\source\repos\ExpensesAPI\ExpensesAPI\bin\EntityFramework.dll
 C:\Users\and\source\repos\ExpensesAPI\ExpensesAPI\bin\EntityFramework.SqlServer.dll
 C:\Users\and\source\repos\ExpensesAPI\ExpensesAPI\bin\EntityFramework.xml
 C:\Users\and\source\repos\ExpensesAPI\ExpensesAPI\bin\EntityFramework.SqlServer.xml
+C:\Users\and\source\repos\ExpensesAPI\ExpensesAPI\obj\Debug\ExpensesAPI.Migrations.InitialCreate.resources
+C:\Users\and\source\repos\ExpensesAPI\ExpensesAPI\obj\Debug\ExpensesAPI.csproj.GenerateResource.cache
+C:\Users\and\source\repos\ExpensesAPI\ExpensesAPI\obj\Debug\ExpensesAPI.Migrations.AddRelationships.resources

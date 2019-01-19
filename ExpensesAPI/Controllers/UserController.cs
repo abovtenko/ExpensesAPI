@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using ExpensesAPI.Data;
 using ExpensesAPI.Models;
+using ExpensesAPI.Services;
 using Newtonsoft.Json;
 
 namespace ExpensesAPI.Controllers
@@ -13,7 +14,7 @@ namespace ExpensesAPI.Controllers
     [RoutePrefix("api/users")]
     public class UserController : ApiController
     {
-        private readonly ExpensesContext _context = new ExpensesContext();
+        private readonly UserService _userService = new UserService();
 
         [HttpPost]
         [Route("")]
@@ -21,7 +22,8 @@ namespace ExpensesAPI.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Users.Add(model);
+                _userService.Create(model);
+                _userService.Save();
                 var content = new { location = $"{Request.RequestUri.Host}/api/users/{model.UserID}"};
 
                 return Request.CreateResponse(HttpStatusCode.Created, JsonConvert.SerializeObject(content));
@@ -37,13 +39,14 @@ namespace ExpensesAPI.Controllers
         {
             if (ModelState.IsValid)
             {
-                var target = _context.Users.Where(x => x.UserID == model.UserID).SingleOrDefault();
+                _userService.Update(model);
+                /*
                 if (target == null)
                 {
                     return Request.CreateResponse(HttpStatusCode.NotFound);
                 }
-
-                target.Username = model.Username;
+                */
+                _userService.Save();
                 var content = new { location = $"{Request.RequestUri.Host}/api/users/{model.UserID}" };
 
                 return Request.CreateResponse(HttpStatusCode.OK, JsonConvert.SerializeObject(content));
@@ -56,20 +59,22 @@ namespace ExpensesAPI.Controllers
         [Route("{id}")]
         public HttpResponseMessage Delete(int id)
         {
-            var target = _context.Users.Where(x => x.UserID == id).SingleOrDefault();
+            _userService.Remove(id);
+            /*
             if (target == null)
             {
                 return Request.CreateResponse(HttpStatusCode.NotFound);
             }
+            */
+            _userService.Save();
 
-            _context.Users.Remove(target);
             return Request.CreateResponse(HttpStatusCode.OK);
         }
 
         [Route("{id}")]
         public HttpResponseMessage Get(int id)
         {
-            var result = _context.Users.Where(x => x.UserID == id).SingleOrDefault();
+            var result = _userService.Get(id);
             if (result == null)
             {
                 return Request.CreateResponse(HttpStatusCode.NotFound);
@@ -83,13 +88,8 @@ namespace ExpensesAPI.Controllers
         [Route("{id}/transactions")]
         public HttpResponseMessage GetTransactions(int id)
         {
-            var user = _context.Users.Where(x => x.UserID == id).SingleOrDefault();
-            if (user == null)
-            {
-                return Request.CreateResponse(HttpStatusCode.NotFound);
-            }
-
-            var result = _context.Transactions.Where(x => x.UserID == user.UserID);
+            var transactionService = new TransactionService();
+            var result = transactionService.GetWhere(x => x.User.UserID == id).ToList();
             var response = Request.CreateResponse(HttpStatusCode.OK, JsonConvert.SerializeObject(result));
 
             return response;
@@ -98,7 +98,7 @@ namespace ExpensesAPI.Controllers
         [Route("")]
         public HttpResponseMessage GetAll()
         {
-            var result = _context.Users.ToList();
+            var result = _userService.GetAll();
             var response = Request.CreateResponse(HttpStatusCode.OK, JsonConvert.SerializeObject(result));
 
             return response;

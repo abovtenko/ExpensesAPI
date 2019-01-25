@@ -12,13 +12,16 @@ namespace ExpensesAPI.Data
         public ExpensesContext() : base("DefaultConnection")
         { }
 
+        public ExpensesContext(string con) : base(con)
+        { }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Transaction>()
-                .HasRequired(t => t.User)
-                .WithMany(u => u.Transactions)
+                .HasRequired(t => t.TransactionUser)
+                .WithMany(u => u.UserTransactions)
                 .WillCascadeOnDelete(false);
         }
 

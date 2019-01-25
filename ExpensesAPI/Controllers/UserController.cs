@@ -89,7 +89,7 @@ namespace ExpensesAPI.Controllers
         public HttpResponseMessage GetTransactions(int id)
         {
             var transactionService = new TransactionService();
-            var result = transactionService.GetWhere(x => x.User.UserID == id).ToList();
+            var result = transactionService.GetWhere(x => x.TransactionUser.UserID == id).ToList();
             var response = Request.CreateResponse(HttpStatusCode.OK, JsonConvert.SerializeObject(result));
 
             return response;

@@ -10,13 +10,13 @@ namespace ExpensesAPI.Models
     {
         public User()
         {
-            Transactions = new HashSet<Transaction>();
+            UserTransactions = new HashSet<Transaction>();
         }
 
         public int UserID { get; set; }
         public string Username { get; set; }
 
         [JsonIgnore]
-        public virtual ICollection<Transaction> Transactions { get; set; }
+        public virtual ICollection<Transaction> UserTransactions { get; set; }
     }
 }

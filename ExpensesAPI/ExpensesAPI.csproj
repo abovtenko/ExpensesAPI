@@ -125,9 +125,9 @@
     <Compile Include="Migrations\201901141905383_InitialCreate.Designer.cs">
       <DependentUpon>201901141905383_InitialCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201901190125536_AddRelationships.cs" />
-    <Compile Include="Migrations\201901190125536_AddRelationships.Designer.cs">
-      <DependentUpon>201901190125536_AddRelationships.cs</DependentUpon>
+    <Compile Include="Migrations\201901240218191_ChangeNavigationPropNames.cs" />
+    <Compile Include="Migrations\201901240218191_ChangeNavigationPropNames.Designer.cs">
+      <DependentUpon>201901240218191_ChangeNavigationPropNames.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Transaction.cs" />
@@ -154,8 +154,8 @@
     <EmbeddedResource Include="Migrations\201901141905383_InitialCreate.resx">
       <DependentUpon>201901141905383_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901190125536_AddRelationships.resx">
-      <DependentUpon>201901190125536_AddRelationships.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201901240218191_ChangeNavigationPropNames.resx">
+      <DependentUpon>201901240218191_ChangeNavigationPropNames.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

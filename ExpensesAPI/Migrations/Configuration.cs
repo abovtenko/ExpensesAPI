@@ -5,7 +5,7 @@ namespace ExpensesAPI.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<ExpensesAPI.Data.ExpensesContext>
+    public class Configuration : DbMigrationsConfiguration<ExpensesAPI.Data.ExpensesContext>
     {
         public Configuration()
         {

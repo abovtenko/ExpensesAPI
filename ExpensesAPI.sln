@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28010.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpensesAPI", "ExpensesAPI\ExpensesAPI.csproj", "{ECE7DF23-DA09-4EED-A75B-A4E39566D031}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpensesAPI.Test.Integration", "ExpensesAPI.Test.Integration\ExpensesAPI.Test.Integration.csproj", "{564D513B-9F14-43A5-8133-AC87F18C8B10}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{ECE7DF23-DA09-4EED-A75B-A4E39566D031}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ECE7DF23-DA09-4EED-A75B-A4E39566D031}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ECE7DF23-DA09-4EED-A75B-A4E39566D031}.Release|Any CPU.Build.0 = Release|Any CPU
+		{564D513B-9F14-43A5-8133-AC87F18C8B10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{564D513B-9F14-43A5-8133-AC87F18C8B10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{564D513B-9F14-43A5-8133-AC87F18C8B10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{564D513B-9F14-43A5-8133-AC87F18C8B10}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

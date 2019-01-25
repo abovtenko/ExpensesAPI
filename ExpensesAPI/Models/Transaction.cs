@@ -15,7 +15,8 @@ namespace ExpensesAPI.Models
         public double? CreditAmount { get; set; }  
         
         public int UserID { get; set; }
+
         [JsonIgnore]
-        public virtual User User { get; set; }
+        public virtual User TransactionUser { get; set; }
     }
 }

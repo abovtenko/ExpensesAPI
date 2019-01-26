@@ -1,26 +1,27 @@
-﻿using System;
-using ExpensesAPI.Services;
+﻿using ExpensesAPI.Data;
 using ExpensesAPI.Models;
-using ExpensesAPI.Data;
+using ExpensesAPI.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Xunit;
+using Newtonsoft.Json;
 
 namespace ExpensesAPI.Test.Integration
 {
-    public class Test_UserService : IDisposable
+    public class Test_TransactionService : IDisposable
     {
         private ExpensesContext _context;
-        private UserService _userService;
+        private TransactionService _testService;
         private User _testUser;
         private List<Models.Transaction> _testTransactions;
 
-        public Test_UserService()
+        public Test_TransactionService()
         {
             _context = new ExpensesContext();
             _context.Database.CreateIfNotExists();
 
-            _userService = new UserService();
+            _testService = new TransactionService(); 
             
             _testTransactions = new List<Models.Transaction>
             {
@@ -52,7 +53,7 @@ namespace ExpensesAPI.Test.Integration
         {            
             _context.Database.Delete();
 
-            _userService = null;
+            _testService = null;
             _testUser = null;
             _testTransactions = null;
         }
@@ -60,77 +61,86 @@ namespace ExpensesAPI.Test.Integration
         [Fact]
         public void Create_PersistedRecordFieldsMatchTestUserProperties()
         {
-            User userPersisted;
-            var userTest = new User
+            Transaction actualModel;
+            var testModel = new Transaction
             {
-                Username = "UserTwo"
+                TransactionDate = "2021-01-31",
+                Description = "candy",
+                CreditAmount = 0,
+                DebitAmount = 7.99
             };
 
-            _userService.Create(userTest);
-            _userService.Save();
+            _testService.Create(testModel);
+            _testService.Save();
             using (var context = new ExpensesContext())
             {
-                userPersisted = context.Users.ToList()[1];
+                actualModel = context.Transactions.Find(3);
             }
 
-            Assert.Equal(userTest.Username, userPersisted.Username);
+            var testModelJson = JsonConvert.SerializeObject(testModel);
+            var actualModelJson = JsonConvert.SerializeObject(actualModel);
+
+            Assert.Equal(testModelJson, actualModelJson);
         }
 
         [Fact]
         public void Update_UpdatedRecordFieldsMatchTestUserProperties()
         {
-            User userPersisted;
-            var userUpdated = _context.Users.ToList().FirstOrDefault();
-            userUpdated.Username = "MyNewUsername";
+            Transaction actualModel;
+            var updatedModel = _context.Transactions.ToList().FirstOrDefault();
+            updatedModel.Description = "newspaper";
 
-            _userService.Update(userUpdated);
-            _userService.Save();
+            _testService.Update(updatedModel);
+            _testService.Save();
             using (var context = new ExpensesContext())
             {
-                userPersisted = context.Users.ToList().FirstOrDefault();
+                actualModel = context.Transactions.ToList().FirstOrDefault();
             }
 
-            Assert.Equal(userUpdated.Username, userPersisted.Username);
+            var testModelJson = JsonConvert.SerializeObject(updatedModel);
+            var actualModelJson = JsonConvert.SerializeObject(actualModel);
+
+            Assert.Equal(testModelJson, actualModelJson);
         }
 
         [Fact]
         public void Remove_RemovedRecordIsNull()
         {
-            User userPersisted;
-            var userRemoved = _context.Users.ToList().FirstOrDefault();
+            Transaction actualModel;
+            var removedModel = _context.Transactions.ToList().FirstOrDefault();
 
-            _userService.Remove(userRemoved.UserID);
-            _userService.Save();
+            _testService.Remove(removedModel.TransactionID);
+            _testService.Save();
             using (var context = new ExpensesContext())
             {
-                userPersisted = context.Users.ToList().FirstOrDefault();
+                actualModel = context.Transactions.Find(removedModel.TransactionID);
             }
 
-            Assert.Null(userPersisted);
+            Assert.Null(actualModel);
         }
 
         [Fact]
         public void GetAll_CountMatches()
         {
-            var userCount = _userService.GetAll().ToList().Count;
+            var count = _testService.GetAll().ToList().Count;
 
-            Assert.Equal(1, userCount);
+            Assert.Equal(2, count);
         }
 
         [Fact]
-        public void GetById_CountMatches()
+        public void GetById_ModelIsNotNull()
         {
-            var user = _userService.Get(1);
+            var model = _testService.Get(1);
 
-            Assert.NotNull(user);
+            Assert.NotNull(model);
         }
 
         [Fact]
         public void GetWhere_CountMatches()
         {
-            var userCount = _userService.GetWhere(x => x.Username == "UserOne").ToList().Count;
+            var count = _testService.GetWhere(x => x.Description == "drinks").ToList().Count;
 
-            Assert.Equal(1, userCount);
+            Assert.Equal(1, count);
         }
     }
 }

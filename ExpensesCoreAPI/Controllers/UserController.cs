@@ -68,7 +68,6 @@ namespace ExpensesCoreAPI.Controllers
                 return NotFound();
             }
 
-            //var response = Request.CreateResponse(HttpStatusCode.OK, JsonConvert.SerializeObject(result));
             return Ok(JsonConvert.SerializeObject(result));
         }
 
@@ -77,9 +76,10 @@ namespace ExpensesCoreAPI.Controllers
         public IActionResult GetTransactions(int id, IService<Transaction> service)
         {
             var transactionService = service;
-            var result = transactionService.GetWhere(x => x.TransactionUser.UserID == id).ToList();
+            var result = transactionService.GetWhere(x => x.UserID == id).ToList();
 
             return Ok(JsonConvert.SerializeObject(result));
+
         }
 
         [Route("")]

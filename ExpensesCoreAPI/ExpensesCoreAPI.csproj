@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20190129004142_UpdateModelTransaction.cs" />
+    <Compile Remove="Migrations\20190129004142_UpdateModelTransaction.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="wwwroot\" />
   </ItemGroup>
 

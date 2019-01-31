@@ -1,7 +1,4 @@
-﻿using System.Net;
-using System.Net.Http;
-using ExpensesCoreAPI.Models;
-using Newtonsoft.Json;
+﻿using ExpensesCoreAPI.Models;
 using ExpensesCoreAPI.Services;
 using Microsoft.AspNetCore.Mvc;
 

@@ -1,12 +1,12 @@
 ﻿using System;
-using ExpensesAPI.Services;
-using ExpensesAPI.Models;
-using ExpensesAPI.Data;
+using ExpensesCoreAPI.Services;
+using ExpensesCoreAPI.Models;
+using ExpensesCoreAPI.Data;
 using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 
-namespace ExpensesAPI.Test.Integration
+namespace ExpensesCoreAPI.Test.Integration
 {
     public class Test_UserService : IDisposable
     {

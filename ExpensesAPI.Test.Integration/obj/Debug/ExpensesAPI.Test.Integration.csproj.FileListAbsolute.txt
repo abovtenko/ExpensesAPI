@@ -1,2 +1,0 @@
-C:\Users\and\source\repos\ExpensesAPI\ExpensesAPI.Test.Integration\obj\Debug\ExpensesAPI.Test.Integration.csprojAssemblyReference.cache
-C:\Users\and\source\repos\ExpensesAPI\ExpensesAPI.Test.Integration\obj\Debug\ExpensesAPI.Test.Integration.csproj.CoreCompileInputs.cache

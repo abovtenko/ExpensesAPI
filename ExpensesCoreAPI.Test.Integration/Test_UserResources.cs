@@ -14,8 +14,6 @@ namespace ExpensesCoreAPI.Test.Integration
         }
 
         [Theory]
-
-
         [InlineData("api/users")]
         public async Task Get_Users_ReturnsSuccessAndCorrectContent(string url)
         {

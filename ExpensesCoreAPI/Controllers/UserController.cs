@@ -3,7 +3,6 @@ using System.Net;
 using System.Net.Http;
 using ExpensesCoreAPI.Models;
 using ExpensesCoreAPI.Services;
-using Newtonsoft.Json;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ExpensesCoreAPI.Controllers
@@ -19,6 +18,24 @@ namespace ExpensesCoreAPI.Controllers
             _userService = service;
         }
 
+        [Route("")]
+        public IActionResult GetAll()
+        {
+            return Ok(_userService.GetAll());
+        }
+
+        [Route("{id}")]
+        public IActionResult Get(int id)
+        {
+            var result = _userService.Get(id);
+            if (result == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(result);
+        }
+
         [HttpPost]
         [Route("")]
         public IActionResult Post([FromBody]User model)
@@ -31,7 +48,7 @@ namespace ExpensesCoreAPI.Controllers
             _userService.Create(model);
             _userService.Save();
 
-            return Created($"{Request.Host}/api/transactions/{model.UserID}", model);
+            return Created($"{Request.Host}/api/users/{model.UserID}", model);
         }
 
         [HttpPut]
@@ -59,18 +76,6 @@ namespace ExpensesCoreAPI.Controllers
             return Ok();
         }
 
-        [Route("{id}")]
-        public IActionResult Get(int id)
-        {
-            var result = _userService.Get(id);
-            if (result == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(JsonConvert.SerializeObject(result));
-        }
-
         [HttpGet]
         [Route("{id}/transactions")]
         public IActionResult GetTransactions(int id, IService<Transaction> service)
@@ -78,16 +83,7 @@ namespace ExpensesCoreAPI.Controllers
             var transactionService = service;
             var result = transactionService.GetWhere(x => x.UserID == id).ToList();
 
-            return Ok(JsonConvert.SerializeObject(result));
-
-        }
-
-        [Route("")]
-        public IActionResult GetAll()
-        {
-            var result = _userService.GetAll();
-
-            return Ok(JsonConvert.SerializeObject(result));
+            return Ok(result);
         }
     }
 }

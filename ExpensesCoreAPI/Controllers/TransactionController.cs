@@ -18,51 +18,10 @@ namespace ExpensesCoreAPI.Controllers
             _transactionService = service;
         }
 
-        [HttpPost]
         [Route("")]
-        public HttpResponseMessage Post([FromBody]Transaction model)
+        public IActionResult GetAll()
         {
-            if (!ModelState.IsValid)
-            {
-                return new HttpResponseMessage(HttpStatusCode.BadRequest);                
-            }
-
-            _transactionService.Create(model);
-            _transactionService.Save();
-
-            var response = new HttpResponseMessage(HttpStatusCode.Created);
-            response.Content = new StringContent($"{{ location = {Request.Host}/api/transactions/{model.TransactionID} }}");
-
-            return response;
-        }
-
-        [HttpPut]
-        [Route("")]
-        public HttpResponseMessage Put([FromBody] Transaction model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return new HttpResponseMessage(HttpStatusCode.BadRequest);
-            }
-
-            _transactionService.Update(model);
-            _transactionService.Save();
-
-            var response = new HttpResponseMessage(HttpStatusCode.OK);
-            response.Content = new StringContent($"{{ location = {Request.Host}/api/transactions/{model.TransactionID} }}");
-
-            return response;
-        }
-
-        
-        [HttpDelete]
-        [Route("{id}")]
-        public IActionResult Delete(int id)
-        {
-            _transactionService.Remove(id);
-            _transactionService.Save();
-
-            return Ok();
+            return Ok(_transactionService.GetAll());
         }
 
         [Route("{id}")]
@@ -74,18 +33,48 @@ namespace ExpensesCoreAPI.Controllers
                 return NotFound();
             }
 
-            //var response = Request.CreateResponse(HttpStatusCode.OK, JsonConvert.SerializeObject(result));
-
             return Ok(result);
         }
 
+        [HttpPost]
         [Route("")]
-        public IActionResult GetAll()
+        public IActionResult Post([FromBody]Transaction model)
         {
-            var result = _transactionService.GetAll();
-            //var response = Request.CreateResponse(HttpStatusCode.OK, JsonConvert.SerializeObject(result));
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();                
+            }
 
-            return Ok(JsonConvert.SerializeObject(result));
+            _transactionService.Create(model);
+            _transactionService.Save();
+
+            return Created($"{Request.Host}/api/transactions/{model.TransactionID}", model);
+        }
+
+        [HttpPut]
+        [Route("")]
+        public IActionResult Put([FromBody] Transaction model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            _transactionService.Update(model);
+            _transactionService.Save();
+
+            return Ok(model);
+        }
+
+        
+        [HttpDelete]
+        [Route("{id}")]
+        public IActionResult Delete(int id)
+        {
+            _transactionService.Remove(id);
+            _transactionService.Save();
+
+            return Ok();
         }
     }
 }

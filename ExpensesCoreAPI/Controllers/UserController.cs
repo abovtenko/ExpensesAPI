@@ -76,7 +76,7 @@ namespace ExpensesCoreAPI.Controllers
 
         [HttpGet]
         [Route("{id}/transactions")]
-        public IActionResult GetTransactions(int id, IService<Transaction> service)
+        public IActionResult GetTransactions(int id, [FromServices]IService<Transaction> service)
         {
             var transactionService = service;
             var result = transactionService.GetWhere(x => x.UserID == id).ToList();

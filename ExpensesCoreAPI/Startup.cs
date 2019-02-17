@@ -28,6 +28,7 @@ namespace ExpensesCoreAPI
             services.AddScoped<DbContext, ExpensesContext>();
             services.AddScoped<IService<User>, UserService>();
             services.AddScoped<IService<Transaction>, TransactionService>();
+            services.AddScoped<IService<Account>, AccountService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

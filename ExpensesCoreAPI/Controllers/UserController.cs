@@ -74,16 +74,15 @@ namespace ExpensesCoreAPI.Controllers
             return Ok();
         }
 
-        /*
+        
         [HttpGet]
-        [Route("{id}/transactions")]
-        public IActionResult GetTransactions(int id, [FromServices]IService<Transaction> service)
+        [Route("{id}/accounts")]
+        public IActionResult GetAccounts(int id, [FromServices]IService<Account> service)
         {
-            var transactionService = service;
-            var result = transactionService.GetWhere(x => x.UserID == id).ToList();
+            var result = service.GetWhere(x => x.UserID == id).ToList();
 
             return Ok(result);
         }
-        */
+        
     }
 }

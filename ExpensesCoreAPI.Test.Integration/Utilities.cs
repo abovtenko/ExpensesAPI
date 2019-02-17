@@ -11,8 +11,10 @@ namespace ExpensesCoreAPI.Test.Integration
         {
             var users = GetTestUsers();
             var transactions = GetTestTransactions();
+            var accounts = GetTestAccounts();
 
             db.Transactions.AddRange(transactions);
+            db.Accounts.AddRange(accounts);
             db.Users.AddRange(users);
             db.SaveChanges();
         }
@@ -36,6 +38,21 @@ namespace ExpensesCoreAPI.Test.Integration
                     Description = "test",
                     CreditAmount = 0.00,
                     DebitAmount = 50.00
+                }
+            };
+        }
+
+        public static List<Models.Account> GetTestAccounts()
+        {
+            return new List<Models.Account>
+            {
+                new Models.Account
+                {
+                    Provider = "",
+                    Balance = 100.00,
+                    Type = "test",
+                    DateOpened = new DateTime(2020, 01, 01),
+                    DateClosed = null
                 }
             };
         }

@@ -7,13 +7,13 @@ namespace ExpensesCoreAPI.Models
     {
         public User()
         {
-            UserTransactions = new HashSet<Transaction>();
+            Accounts = new HashSet<Account>();
         }
 
         public int UserID { get; set; }
         public string Username { get; set; }
 
         [JsonIgnore]
-        public virtual ICollection<Transaction> UserTransactions { get; set; }
+        public ICollection<Account> Accounts { get; set; }
     }
 }

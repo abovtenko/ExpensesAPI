@@ -11,3 +11,4 @@ C:\Users\and\source\repos\ExpensesAPI\ExpensesCoreAPI\obj\Debug\netcoreapp2.2\Ex
 C:\Users\and\source\repos\ExpensesAPI\ExpensesCoreAPI\obj\Debug\netcoreapp2.2\ExpensesCoreAPI.RazorTargetAssemblyInfo.cache
 C:\Users\and\source\repos\ExpensesAPI\ExpensesCoreAPI\obj\Debug\netcoreapp2.2\ExpensesCoreAPI.dll
 C:\Users\and\source\repos\ExpensesAPI\ExpensesCoreAPI\obj\Debug\netcoreapp2.2\ExpensesCoreAPI.pdb
+C:\Users\and\source\repos\ExpensesAPI\ExpensesCoreAPI\obj\Debug\netcoreapp2.2\ExpensesCoreAPI.csprojAssemblyReference.cache

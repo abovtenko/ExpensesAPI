@@ -74,6 +74,7 @@ namespace ExpensesCoreAPI.Controllers
             return Ok();
         }
 
+        /*
         [HttpGet]
         [Route("{id}/transactions")]
         public IActionResult GetTransactions(int id, [FromServices]IService<Transaction> service)
@@ -83,5 +84,6 @@ namespace ExpensesCoreAPI.Controllers
 
             return Ok(result);
         }
+        */
     }
 }

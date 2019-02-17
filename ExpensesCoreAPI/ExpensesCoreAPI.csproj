@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20190217202119_AddAccountEntity.cs" />
+    <Compile Remove="Migrations\20190217202119_AddAccountEntity.Designer.cs" />
+    <Compile Remove="Migrations\20190217202750_AddAccountEntity.cs" />
+    <Compile Remove="Migrations\20190217202750_AddAccountEntity.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="wwwroot\" />
   </ItemGroup>
 

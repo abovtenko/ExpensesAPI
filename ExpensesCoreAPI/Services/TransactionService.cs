@@ -42,7 +42,7 @@ namespace ExpensesCoreAPI.Services
 
             if (target != null)
             {
-                target.TransactionUser.UserID = model.TransactionUser.UserID;
+                target.TransactionAccount.AccountID = model.TransactionAccount.AccountID;
                 target.TransactionDate = model.TransactionDate;
                 target.Description = model.Description;
                 target.CreditAmount = model.CreditAmount;

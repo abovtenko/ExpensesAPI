@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc.Testing;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -26,7 +25,7 @@ namespace ExpensesCoreAPI.Test.Integration
         [InlineData("api/users/", 2)]
         public async Task Get_User_ReturnsCorrectResponseProperties(string url, int userId)
         {
-            var expectedResult = Utilities.GetTestUsers()[userId - 1];
+            var expectedResult = SeedData.GetTestUsers()[userId - 1];
 
             var response = await _client.GetAsync(url + userId);
 
@@ -40,7 +39,7 @@ namespace ExpensesCoreAPI.Test.Integration
         [InlineData("api/users/")]
         public async Task Get_UsersAll_ReturnsCorrectResponseProperties(string url)
         {
-            var expectedResult = Utilities.GetTestUsers();
+            var expectedResult = SeedData.GetTestUsers();
 
             var response = await _client.GetAsync(url);
 
@@ -56,7 +55,7 @@ namespace ExpensesCoreAPI.Test.Integration
         [InlineData("api/users/")]
         public async Task Post_User_ReturnsCorrectResponseProperties(string url)
         {
-            var postData = Utilities.GetTestUsers()[0];
+            var postData = SeedData.GetTestUsers()[0];
             postData.Username = "PostedUser";
             var content = new StringContent(JsonConvert.SerializeObject(postData));
             content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
@@ -70,7 +69,7 @@ namespace ExpensesCoreAPI.Test.Integration
         [InlineData("api/users/")]
         public async Task Put_User_ReturnsCorrectResponseProperties(string url)
         {
-            var postData = Utilities.GetTestUsers()[0];
+            var postData = SeedData.GetTestUsers()[0];
             postData.Username = "UpdatedUser";
             var content = new StringContent(JsonConvert.SerializeObject(postData));
             content.Headers.ContentType = new MediaTypeHeaderValue("application/json");

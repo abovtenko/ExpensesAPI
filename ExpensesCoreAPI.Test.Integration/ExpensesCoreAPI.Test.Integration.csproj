@@ -25,4 +25,10 @@
     <ProjectReference Include="..\ExpensesCoreAPI\ExpensesCoreAPI.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ResourceTests\Account\" />
+    <Folder Include="ResourceTests\Transaction\" />
+    <Folder Include="ResourceTests\User\" />
+  </ItemGroup>
+
 </Project>

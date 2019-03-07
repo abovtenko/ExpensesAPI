@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -23,11 +22,11 @@ namespace ExpensesCoreAPI.Test.Integration
 
         [Theory]
         [InlineData("api/transactions/", 1)]
-        public async Task Get_Transaction_ReturnsCorrectResponseProperties(string url, int userId)
+        public async Task Get_Transaction_ReturnsCorrectResponseProperties(string url, int id)
         {
-            var expectedResult = Utilities.GetTestTransactions()[userId - 1];
+            var expectedResult = SeedData.GetTestTransactions()[id - 1];
 
-            var response = await _client.GetAsync(url + userId);
+            var response = await _client.GetAsync(url + id);
 
             var content = await response.Content.ReadAsStringAsync();
             var actualResult = JsonConvert.DeserializeObject<Models.Transaction>(content);
@@ -42,7 +41,7 @@ namespace ExpensesCoreAPI.Test.Integration
         [InlineData("api/transactions/")]
         public async Task Get_TransactionsAll_ReturnsCorrectResponseProperties(string url)
         {
-            var expectedResult = Utilities.GetTestTransactions();
+            var expectedResult = SeedData.GetTestTransactions();
 
             var response = await _client.GetAsync(url);
 
@@ -60,7 +59,7 @@ namespace ExpensesCoreAPI.Test.Integration
         [InlineData("api/transactions/")]
         public async Task Post_Transaction_ReturnsCorrectResponseProperties(string url)
         {
-            var postData = Utilities.GetTestTransactions()[0];
+            var postData = SeedData.GetTestTransactions()[0];
             postData.CreditAmount = 100.00;
             var content = new StringContent(JsonConvert.SerializeObject(postData));
             content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
@@ -74,7 +73,7 @@ namespace ExpensesCoreAPI.Test.Integration
         [InlineData("api/transactions/")]
         public async Task Put_Transaction_ReturnsCorrectResponseProperties(string url)
         {
-            var postData = Utilities.GetTestTransactions()[0];
+            var postData = SeedData.GetTestTransactions()[0];
             postData.CreditAmount = 100.00;
             var content = new StringContent(JsonConvert.SerializeObject(postData));
             content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
@@ -86,9 +85,9 @@ namespace ExpensesCoreAPI.Test.Integration
 
         [Theory]
         [InlineData("api/transactions/", 1)]
-        public async Task Delete_Transaction_ReturnsCorrectResponseProperties(string url, int userId)
+        public async Task Delete_Transaction_ReturnsCorrectResponseProperties(string url, int id)
         {
-            var response = await _client.DeleteAsync(url + userId);
+            var response = await _client.DeleteAsync(url + id);
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }

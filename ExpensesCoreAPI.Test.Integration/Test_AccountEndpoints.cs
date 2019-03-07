@@ -25,7 +25,7 @@ namespace ExpensesCoreAPI.Test.Integration
         [InlineData("api/accounts/", 1)]
         public async Task Get_Account_ReturnsCorrectResponseProperties(string url, int id)
         {
-            var expectedResult = Utilities.GetTestAccounts()[id - 1];
+            var expectedResult = SeedData.GetTestAccounts()[id - 1];
 
             var response = await _client.GetAsync(url + id);
 
@@ -43,7 +43,7 @@ namespace ExpensesCoreAPI.Test.Integration
         [InlineData("api/accounts/")]
         public async Task Get_AccountsAll_ReturnsCorrectResponseProperties(string url)
         {
-            var expectedResult = Utilities.GetTestAccounts();
+            var expectedResult = SeedData.GetTestAccounts();
 
             var response = await _client.GetAsync(url);
 
@@ -62,7 +62,7 @@ namespace ExpensesCoreAPI.Test.Integration
         [InlineData("api/accounts/")]
         public async Task Post_Account_ReturnsCorrectResponseProperties(string url)
         {
-            var postData = Utilities.GetTestAccounts()[0];
+            var postData = SeedData.GetTestAccounts()[0];
             postData.Provider = "NewProvider";
             var content = new StringContent(JsonConvert.SerializeObject(postData));
             content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
@@ -76,7 +76,7 @@ namespace ExpensesCoreAPI.Test.Integration
         [InlineData("api/accounts/")]
         public async Task Put_Account_ReturnsCorrectResponseProperties(string url)
         {
-            var postData = Utilities.GetTestAccounts()[0];
+            var postData = SeedData.GetTestAccounts()[0];
             postData.Balance = 0.00;
             var content = new StringContent(JsonConvert.SerializeObject(postData));
             content.Headers.ContentType = new MediaTypeHeaderValue("application/json");

@@ -30,7 +30,7 @@ namespace ExpensesCoreAPI.Test.Integration
 
                     db.Database.EnsureCreated();
 
-                    Utilities.InitializeTestDB(db);
+                    SeedData.InitializeTestDB(db);
                 }
             });
         }

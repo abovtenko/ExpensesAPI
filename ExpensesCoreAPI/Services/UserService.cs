@@ -7,7 +7,7 @@ using System.Linq.Expressions;
 
 namespace ExpensesCoreAPI.Services
 {
-    public class UserService : IService<User>
+    public class UserService : IService<AppUser>
     {
         private readonly ExpensesContext _context;
 
@@ -16,39 +16,39 @@ namespace ExpensesCoreAPI.Services
             _context = context;
         }
 
-        public void Create(User model)
+        public void Create(AppUser model)
         {
             _context.Users.Add(model);
         }
 
-        public User Get(int id)
+        public AppUser Get(int id)
         {
-            return _context.Users.Where(x => x.UserID == id).SingleOrDefault();
+            return _context.AppUsers.Where(x => x.UserID == id).SingleOrDefault();
         }
 
-        public IEnumerable<User> GetWhere(Expression<Func<User, bool>> predicate)
+        public IEnumerable<AppUser> GetWhere(Expression<Func<AppUser, bool>> predicate)
         {
-            return _context.Users.Where(predicate).ToList();
+            return _context.AppUsers.Where(predicate).ToList();
         }
 
-        public IEnumerable<User> GetAll()
+        public IEnumerable<AppUser> GetAll()
         {
-            return _context.Users.ToList();
+            return _context.AppUsers.ToList();
         }
 
-        public void Update(User model)
+        public void Update(AppUser model)
         {
-            var target = _context.Users.Where(x => x.UserID == model.UserID).SingleOrDefault();
+            var target = _context.AppUsers.Where(x => x.UserID == model.UserID).SingleOrDefault();
 
             if (target != null)
             {
-                target.Username = model.Username;
+                target.UserName = model.UserName;
             }
         }
 
         public void Remove(int id)
         {
-            var target = _context.Users.Where(x => x.UserID == id).SingleOrDefault();
+            var target = _context.AppUsers.Where(x => x.UserID == id).SingleOrDefault();
             if (target != null)
             {
                 _context.Users.Remove(target);

@@ -30,9 +30,9 @@ namespace ExpensesCoreAPI.Test.Integration
             var response = await _client.GetAsync(url + userId);
 
             var content = await response.Content.ReadAsStringAsync();
-            var actualResult = JsonConvert.DeserializeObject<Models.User>(content);
+            var actualResult = JsonConvert.DeserializeObject<Models.AppUser>(content);
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-            Assert.Equal(actualResult.Username, expectedResult.Username);
+            Assert.Equal(actualResult.UserName, expectedResult.UserName);
         }
 
         [Theory]
@@ -44,11 +44,11 @@ namespace ExpensesCoreAPI.Test.Integration
             var response = await _client.GetAsync(url);
 
             var content = await response.Content.ReadAsStringAsync();
-            var actualResult = JsonConvert.DeserializeObject<List<Models.User>>(content);
+            var actualResult = JsonConvert.DeserializeObject<List<Models.AppUser>>(content);
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             Assert.Equal(expectedResult.Count, actualResult.Count);
-            Assert.Contains(expectedResult, x => x.Username == expectedResult[0].Username);
-            Assert.Contains(expectedResult, x => x.Username == expectedResult[1].Username);
+            Assert.Contains(expectedResult, x => x.UserName == expectedResult[0].UserName);
+            Assert.Contains(expectedResult, x => x.UserName == expectedResult[1].UserName);
         }
 
         [Theory]
@@ -56,7 +56,7 @@ namespace ExpensesCoreAPI.Test.Integration
         public async Task Post_User_ReturnsCorrectResponseProperties(string url)
         {
             var postData = SeedData.GetTestUsers()[0];
-            postData.Username = "PostedUser";
+            postData.UserName = "PostedUser";
             var content = new StringContent(JsonConvert.SerializeObject(postData));
             content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
@@ -70,7 +70,7 @@ namespace ExpensesCoreAPI.Test.Integration
         public async Task Put_User_ReturnsCorrectResponseProperties(string url)
         {
             var postData = SeedData.GetTestUsers()[0];
-            postData.Username = "UpdatedUser";
+            postData.UserName = "UpdatedUser";
             var content = new StringContent(JsonConvert.SerializeObject(postData));
             content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 

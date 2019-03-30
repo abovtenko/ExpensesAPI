@@ -1,7 +1,10 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
 using ExpensesCoreAPI.Models;
 using ExpensesCoreAPI.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace ExpensesCoreAPI.Controllers
 {
@@ -9,11 +12,13 @@ namespace ExpensesCoreAPI.Controllers
     [Route("api/users")]
     public class UserController : ControllerBase
     {
-        private readonly IService<User> _userService;
+        private readonly IService<AppUser> _userService;
+        private readonly UserManager<AppUser> _userManager;
 
-        public UserController(IService<User> service)
+        public UserController(IService<AppUser> service, UserManager<AppUser> userManager)
         {
             _userService = service;
+            _userManager = userManager;
         }
 
         [Route("")]
@@ -36,22 +41,30 @@ namespace ExpensesCoreAPI.Controllers
 
         [HttpPost]
         [Route("")]
-        public IActionResult Post([FromBody]User model)
+        public async Task<IActionResult> Post([FromBody] RegistrationViewModel model)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
 
-            _userService.Create(model);
+            var user = new AppUser { UserName = model.UserName };
+            var result = await _userManager.CreateAsync(user, model.Password);
+
+            if (!result.Succeeded)
+            {
+                return BadRequest();
+            }
+
+            //_userService.Create(model);
             _userService.Save();
 
-            return Created($"{Request.Host}/api/users/{model.UserID}", model);
+            return Created($"{Request.Host}/api/users/{user.UserID}", model);
         }
 
         [HttpPut]
         [Route("")]
-        public IActionResult Put([FromBody] User model)
+        public IActionResult Put([FromBody] AppUser model)
         {
             if (!ModelState.IsValid)
             {
@@ -77,12 +90,18 @@ namespace ExpensesCoreAPI.Controllers
         
         [HttpGet]
         [Route("{id}/accounts")]
-        public IActionResult GetAccounts(int id, [FromServices]IService<Account> service)
+        public IActionResult GetAccounts(int id, [FromServices] IService<Account> service)
         {
             var result = service.GetWhere(x => x.UserID == id).ToList();
 
             return Ok(result);
         }
         
+    }
+
+    public class RegistrationViewModel
+    {
+        public string UserName { get; set; }
+        public string Password { get; set; }
     }
 }

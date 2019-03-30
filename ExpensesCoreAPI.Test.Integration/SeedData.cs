@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Net;
-using System.Linq;
-using System.Text;
 
 namespace ExpensesCoreAPI.Test.Integration
 {
     public class SeedData
     {
-        public List<Models.User> Users { get; }
+        public List<Models.AppUser> Users { get; }
         public List<Models.Transaction> Transactions { get; }
         public List<Models.Account> Accounts { get; }
 
@@ -35,10 +32,10 @@ namespace ExpensesCoreAPI.Test.Integration
                     DateClosed = null
                 }
             };
-            Users = new List<Models.User>
+            Users = new List<Models.AppUser>
             {
-                new Models.User { Username = "UserOne" },
-                new Models.User { Username = "UserTwo" }
+                new Models.AppUser { UserName = "UserOne" },
+                new Models.AppUser { UserName = "UserTwo" }
             };
         }
 
@@ -52,16 +49,16 @@ namespace ExpensesCoreAPI.Test.Integration
 
             db.Transactions.AddRange(transactions);
             db.Accounts.AddRange(accounts);
-            db.Users.AddRange(users);
+            db.AppUsers.AddRange(users);
             db.SaveChanges();
         }
 
-        public static List<Models.User> GetTestUsers()
+        public static List<Models.AppUser> GetTestUsers()
         {
-            return new List<Models.User>
+            return new List<Models.AppUser>
             {
-                new Models.User { Username = "UserOne" },
-                new Models.User { Username = "UserTwo" }
+                new Models.AppUser { UserName = "UserOne" },
+                new Models.AppUser { UserName = "UserTwo" }
             };
         }
 

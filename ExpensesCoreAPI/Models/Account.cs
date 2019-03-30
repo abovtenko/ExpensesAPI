@@ -20,7 +20,7 @@ namespace ExpensesCoreAPI.Models
         public DateTime? DateClosed { get; set; }
 
         [JsonIgnore]
-        public User AccountUser { get; set; }
+        public AppUser AccountUser { get; set; }
         [JsonIgnore]
         public virtual ICollection<Transaction> Transactions { get; set; }
     }

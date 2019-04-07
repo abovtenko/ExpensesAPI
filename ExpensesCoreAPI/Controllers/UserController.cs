@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using ExpensesCoreAPI.Models;
 using ExpensesCoreAPI.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -9,6 +10,7 @@ using Newtonsoft.Json;
 namespace ExpensesCoreAPI.Controllers
 {
     [ApiController]
+    [Authorize(Policy = "ApiUser")]
     [Route("api/users")]
     public class UserController : ControllerBase
     {
@@ -56,7 +58,6 @@ namespace ExpensesCoreAPI.Controllers
                 return BadRequest();
             }
 
-            //_userService.Create(model);
             _userService.Save();
 
             return Created($"{Request.Host}/api/users/{user.UserID}", model);

@@ -50,7 +50,7 @@ namespace ExpensesCoreAPI
                 ValidateIssuerSigningKey = true,
                 IssuerSigningKey = _signingKey,
                 RequireExpirationTime = false,
-                ValidateLifetime = false,
+                ValidateLifetime = true,
                 ClockSkew = TimeSpan.Zero
             };
 
@@ -76,6 +76,7 @@ namespace ExpensesCoreAPI
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("ApiUser", policy => policy.RequireClaim("rol", "api_access"));
+                options.AddPolicy("Admin", policy => policy.RequireClaim("admin", "admin"));
             });
         }
 
@@ -91,8 +92,9 @@ namespace ExpensesCoreAPI
                 app.UseHsts();
             }
 
+            app.UseAuthentication();
             app.UseHttpsRedirection();
-            app.UseMvc();
+            app.UseMvc();            
         }
     }
 }

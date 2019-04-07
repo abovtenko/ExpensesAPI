@@ -11,7 +11,7 @@ namespace ExpensesCoreAPI.Models
         public string Audience { get; set; }
         public DateTime Expiration => IssuedAt.Add(ValidFor);
         public DateTime NotBefore { get; set; } = DateTime.UtcNow;
-        public TimeSpan ValidFor { get; set; } = TimeSpan.FromMinutes(20);
+        public TimeSpan ValidFor { get; set; } = TimeSpan.FromMinutes(5);
         public DateTime IssuedAt { get; set; } = DateTime.UtcNow;
         public SigningCredentials SigningCredentials { get; set; }
 

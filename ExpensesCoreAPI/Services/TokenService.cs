@@ -26,6 +26,7 @@ namespace ExpensesCoreAPI.Services
             {
                  new Claim(JwtRegisteredClaimNames.Sub, userName),
                  new Claim(JwtRegisteredClaimNames.Jti, await _jwtOptions.JtiGenerator()),
+                 new Claim(JwtRegisteredClaimNames.Iat, DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString()),
                  identity.FindFirst("rol"),
                  identity.FindFirst("id")
              };

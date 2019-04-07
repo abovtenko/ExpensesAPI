@@ -12,6 +12,5 @@ namespace ExpensesCoreAPI.Services
         Task<string> GenerateEncodedToken(string userName, ClaimsIdentity identity);
         ClaimsIdentity GenerateClaimsIdentity(string userName, string id);
         Task<string> GenerateJwt(ClaimsIdentity identity, string userName);
-
     }
 }

@@ -36,6 +36,11 @@ namespace ExpensesCoreAPI.Services
             return _context.Transactions.ToList();
         }
 
+        public IQueryable<Transaction> GetQueryable()
+        {
+            return _context.Transactions.AsQueryable();
+        }
+
         public void Update(Transaction model)
         {
             var target = _context.Transactions.Where(x => x.TransactionID == model.TransactionID).SingleOrDefault();
@@ -63,5 +68,19 @@ namespace ExpensesCoreAPI.Services
         {
             _context.SaveChanges();
         }
+    }
+
+    public class PaginatedResult : IPagination
+    {
+        public int PageSize {get; set;}
+        public int PageNumber {get; set;}
+
+
+    }
+
+    public interface IPagination
+    {
+        int PageSize { get; set; }
+        int PageNumber { get; set; }
     }
 }

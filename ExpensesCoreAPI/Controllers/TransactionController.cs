@@ -16,9 +16,10 @@ namespace ExpensesCoreAPI.Controllers
         }
 
         [Route("")]
-        public IActionResult GetAll()
+        public IActionResult GetAll([FromQuery] int pageNumber, [FromQuery] int pageSize)
         {
-            return Ok(_transactionService.GetAll());
+            var result = PaginationService.GetPagination(_transactionService.GetQueryable(), pageSize, pageNumber);
+            return Ok(result);
         }
 
         [Route("{id}")]

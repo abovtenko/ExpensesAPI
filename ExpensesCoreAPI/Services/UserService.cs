@@ -36,6 +36,11 @@ namespace ExpensesCoreAPI.Services
             return _context.AppUsers.ToList();
         }
 
+        public IQueryable<AppUser> GetQueryable()
+        {
+            return _context.AppUsers.AsQueryable();
+        }
+
         public void Update(AppUser model)
         {
             var target = _context.AppUsers.Where(x => x.UserID == model.UserID).SingleOrDefault();

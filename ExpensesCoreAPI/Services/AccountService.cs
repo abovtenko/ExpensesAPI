@@ -37,6 +37,11 @@ namespace ExpensesCoreAPI.Services
             return _context.Accounts.ToList();
         }
 
+        public IQueryable<Account> GetQueryable()
+        {
+            return _context.Accounts.AsQueryable();
+        }
+
         public void Update(Account model)
         {
             var target = _context.Accounts.Where(x => x.AccountID == model.AccountID).SingleOrDefault();

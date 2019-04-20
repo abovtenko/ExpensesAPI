@@ -445,6 +445,26 @@
           "lib/netstandard2.0/Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll": {}
         }
       },
+      "Microsoft.AspNetCore.Identity.UI/2.2.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNetCore.Identity": "2.2.0",
+          "Microsoft.AspNetCore.Mvc": "2.2.0",
+          "Microsoft.AspNetCore.StaticFiles": "2.2.0",
+          "Microsoft.Extensions.FileProviders.Embedded": "2.2.0",
+          "Microsoft.Extensions.Identity.Stores": "2.2.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Microsoft.AspNetCore.Identity.UI.Views.V3.dll": {},
+          "lib/netstandard2.0/Microsoft.AspNetCore.Identity.UI.Views.V4.dll": {},
+          "lib/netstandard2.0/Microsoft.AspNetCore.Identity.UI.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.AspNetCore.Identity.UI.Views.V3.dll": {},
+          "lib/netstandard2.0/Microsoft.AspNetCore.Identity.UI.Views.V4.dll": {},
+          "lib/netstandard2.0/Microsoft.AspNetCore.Identity.UI.dll": {}
+        }
+      },
       "Microsoft.AspNetCore.JsonPatch/2.2.0": {
         "type": "package",
         "dependencies": {
@@ -922,6 +942,22 @@
           "lib/netcoreapp2.1/Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.dll": {}
         }
       },
+      "Microsoft.AspNetCore.StaticFiles/2.2.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNetCore.Hosting.Abstractions": "2.2.0",
+          "Microsoft.AspNetCore.Http.Extensions": "2.2.0",
+          "Microsoft.Extensions.FileProviders.Abstractions": "2.2.0",
+          "Microsoft.Extensions.Logging.Abstractions": "2.2.0",
+          "Microsoft.Extensions.WebEncoders": "2.2.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Microsoft.AspNetCore.StaticFiles.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.AspNetCore.StaticFiles.dll": {}
+        }
+      },
       "Microsoft.AspNetCore.TestHost/2.2.0": {
         "type": "package",
         "dependencies": {
@@ -1326,6 +1362,24 @@
         },
         "runtime": {
           "lib/netstandard2.0/Microsoft.Extensions.FileProviders.Composite.dll": {}
+        }
+      },
+      "Microsoft.Extensions.FileProviders.Embedded/2.2.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.FileProviders.Abstractions": "2.2.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Microsoft.Extensions.FileProviders.Embedded.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.Extensions.FileProviders.Embedded.dll": {}
+        },
+        "build": {
+          "build/netstandard2.0/_._": {}
+        },
+        "buildMultiTargeting": {
+          "buildMultiTargeting/_._": {}
         }
       },
       "Microsoft.Extensions.FileProviders.Physical/2.2.0": {
@@ -4556,6 +4610,22 @@
         "microsoft.aspnetcore.identity.entityframeworkcore.nuspec"
       ]
     },
+    "Microsoft.AspNetCore.Identity.UI/2.2.0": {
+      "sha512": "GkFgQmYapCkzbk2Vp/OZsFdpS0PEzmLTHgv9g54Og2dVLFa+WF4WmCst1emskn9Iu32bB72oPi/K5onpzlB+vw==",
+      "type": "package",
+      "path": "microsoft.aspnetcore.identity.ui/2.2.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "THIRD-PARTY-NOTICES.txt",
+        "lib/netstandard2.0/Microsoft.AspNetCore.Identity.UI.Views.V3.dll",
+        "lib/netstandard2.0/Microsoft.AspNetCore.Identity.UI.Views.V4.dll",
+        "lib/netstandard2.0/Microsoft.AspNetCore.Identity.UI.dll",
+        "lib/netstandard2.0/Microsoft.AspNetCore.Identity.UI.xml",
+        "microsoft.aspnetcore.identity.ui.2.2.0.nupkg.sha512",
+        "microsoft.aspnetcore.identity.ui.nuspec"
+      ]
+    },
     "Microsoft.AspNetCore.JsonPatch/2.2.0": {
       "sha512": "wC/QmeleRUhzJRVFJrjWM88qObvvWe8WiQHvS4I+hUOvbexakzYH+5Z+CLoGf8T+xegkpLNqjGIr+stK4B9cDg==",
       "type": "package",
@@ -4971,6 +5041,19 @@
         "lib/netstandard2.0/Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.xml",
         "microsoft.aspnetcore.server.kestrel.transport.sockets.2.2.0.nupkg.sha512",
         "microsoft.aspnetcore.server.kestrel.transport.sockets.nuspec"
+      ]
+    },
+    "Microsoft.AspNetCore.StaticFiles/2.2.0": {
+      "sha512": "7cgW0CpNCaanY2eyanCHRH8Dvm7wPvHzgNlcZKPE9iQnelW7S4PQkijH7vLXqJrqHHuGl1RcQxqFvUncSJBXNg==",
+      "type": "package",
+      "path": "microsoft.aspnetcore.staticfiles/2.2.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.0/Microsoft.AspNetCore.StaticFiles.dll",
+        "lib/netstandard2.0/Microsoft.AspNetCore.StaticFiles.xml",
+        "microsoft.aspnetcore.staticfiles.2.2.0.nupkg.sha512",
+        "microsoft.aspnetcore.staticfiles.nuspec"
       ]
     },
     "Microsoft.AspNetCore.TestHost/2.2.0": {
@@ -5436,6 +5519,25 @@
         "lib/netstandard2.0/Microsoft.Extensions.FileProviders.Composite.xml",
         "microsoft.extensions.fileproviders.composite.2.2.0.nupkg.sha512",
         "microsoft.extensions.fileproviders.composite.nuspec"
+      ]
+    },
+    "Microsoft.Extensions.FileProviders.Embedded/2.2.0": {
+      "sha512": "I4J9TrLvL9LiC02ZXcqGXrDXwhtvAEe6V19DpWFrgEw5OxIVpxd4HXr7oOGHUkfC1NTaohGI9Uzble2BV+sUPQ==",
+      "type": "package",
+      "path": "microsoft.extensions.fileproviders.embedded/2.2.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "build/netstandard2.0/Microsoft.Extensions.FileProviders.Embedded.props",
+        "build/netstandard2.0/Microsoft.Extensions.FileProviders.Embedded.targets",
+        "buildMultiTargeting/Microsoft.Extensions.FileProviders.Embedded.props",
+        "buildMultiTargeting/Microsoft.Extensions.FileProviders.Embedded.targets",
+        "lib/netstandard2.0/Microsoft.Extensions.FileProviders.Embedded.dll",
+        "lib/netstandard2.0/Microsoft.Extensions.FileProviders.Embedded.xml",
+        "microsoft.extensions.fileproviders.embedded.2.2.0.nupkg.sha512",
+        "microsoft.extensions.fileproviders.embedded.nuspec",
+        "tasks/net461/Microsoft.Extensions.FileProviders.Embedded.Manifest.Task.dll",
+        "tasks/netstandard1.5/Microsoft.Extensions.FileProviders.Embedded.Manifest.Task.dll"
       ]
     },
     "Microsoft.Extensions.FileProviders.Physical/2.2.0": {
@@ -11874,6 +11976,7 @@
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 2.2.0",
       "Microsoft.AspNetCore.HttpsPolicy >= 2.2.0",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 2.2.0",
+      "Microsoft.AspNetCore.Identity.UI >= 2.2.0",
       "Microsoft.AspNetCore.Mvc >= 2.2.0",
       "Microsoft.AspNetCore.Mvc.Testing >= 2.2.0",
       "Microsoft.AspNetCore.Razor.Runtime >= 2.2.0",
@@ -11947,6 +12050,10 @@
             "version": "[2.2.0, )"
           },
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+            "target": "Package",
+            "version": "[2.2.0, )"
+          },
+          "Microsoft.AspNetCore.Identity.UI": {
             "target": "Package",
             "version": "[2.2.0, )"
           },

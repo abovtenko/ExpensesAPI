@@ -91,5 +91,19 @@ namespace ExpensesCoreAPI.Test.Integration
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }
+
+        [Theory]
+        [InlineData("api/transactions?pageSize=1&pageNumber=1", 1)]
+        public async Task Get_Transaction_ReturnsCorrectPageSizeAndPageNumber(string url, int id)
+        {
+            var expectedResult = SeedData.GetTestTransactions()[id - 1];
+
+            var response = await _client.GetAsync(url);
+
+            var content = await response.Content.ReadAsStringAsync();
+            var actualResult = JsonConvert.DeserializeObject<List<Models.Transaction>>(content);
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            Assert.Single(actualResult);
+        }
     }
 }

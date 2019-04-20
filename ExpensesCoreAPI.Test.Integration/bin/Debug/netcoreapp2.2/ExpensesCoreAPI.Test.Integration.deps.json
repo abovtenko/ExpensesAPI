@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.2",
-    "signature": "5d67331edc9146f1df2d153dbff744664c1ec823"
+    "signature": "4b915c5de21c6e4e6bdaae143c99507f5ce63840"
   },
   "compilationOptions": {
     "defines": [
@@ -29,6 +29,7 @@
           "Microsoft.AspNetCore.Authentication.JwtBearer": "2.2.0",
           "Microsoft.AspNetCore.HttpsPolicy": "2.2.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "2.2.0",
+          "Microsoft.AspNetCore.Identity.UI": "2.2.0",
           "Microsoft.AspNetCore.Mvc": "2.2.0",
           "Microsoft.AspNetCore.Mvc.Testing": "2.2.0",
           "Microsoft.AspNetCore.Razor.Runtime": "2.2.0",
@@ -553,6 +554,34 @@
           "lib/netstandard2.0/Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll": {}
         }
       },
+      "Microsoft.AspNetCore.Identity.UI/2.2.0": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Identity": "2.2.0",
+          "Microsoft.AspNetCore.Mvc": "2.2.0",
+          "Microsoft.AspNetCore.StaticFiles": "2.2.0",
+          "Microsoft.Extensions.FileProviders.Embedded": "2.2.0",
+          "Microsoft.Extensions.Identity.Stores": "2.2.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.AspNetCore.Identity.UI.Views.V3.dll": {
+            "assemblyVersion": "2.2.0.0",
+            "fileVersion": "2.2.0.18316"
+          },
+          "lib/netstandard2.0/Microsoft.AspNetCore.Identity.UI.Views.V4.dll": {
+            "assemblyVersion": "2.2.0.0",
+            "fileVersion": "2.2.0.18316"
+          },
+          "lib/netstandard2.0/Microsoft.AspNetCore.Identity.UI.dll": {
+            "assemblyVersion": "2.2.0.0",
+            "fileVersion": "2.2.0.18316"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/Microsoft.AspNetCore.Identity.UI.Views.V3.dll": {},
+          "lib/netstandard2.0/Microsoft.AspNetCore.Identity.UI.Views.V4.dll": {},
+          "lib/netstandard2.0/Microsoft.AspNetCore.Identity.UI.dll": {}
+        }
+      },
       "Microsoft.AspNetCore.JsonPatch/2.2.0": {
         "dependencies": {
           "Microsoft.CSharp": "4.5.0",
@@ -1067,6 +1096,24 @@
           "lib/netcoreapp2.1/Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.dll": {}
         }
       },
+      "Microsoft.AspNetCore.StaticFiles/2.2.0": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Hosting.Abstractions": "2.2.0",
+          "Microsoft.AspNetCore.Http.Extensions": "2.2.0",
+          "Microsoft.Extensions.FileProviders.Abstractions": "2.2.0",
+          "Microsoft.Extensions.Logging.Abstractions": "2.2.0",
+          "Microsoft.Extensions.WebEncoders": "2.2.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.AspNetCore.StaticFiles.dll": {
+            "assemblyVersion": "2.2.0.0",
+            "fileVersion": "2.2.0.18316"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/Microsoft.AspNetCore.StaticFiles.dll": {}
+        }
+      },
       "Microsoft.AspNetCore.TestHost/2.2.0": {
         "dependencies": {
           "Microsoft.AspNetCore.Hosting": "2.2.0",
@@ -1505,6 +1552,20 @@
         },
         "compile": {
           "lib/netstandard2.0/Microsoft.Extensions.FileProviders.Composite.dll": {}
+        }
+      },
+      "Microsoft.Extensions.FileProviders.Embedded/2.2.0": {
+        "dependencies": {
+          "Microsoft.Extensions.FileProviders.Abstractions": "2.2.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.Extensions.FileProviders.Embedded.dll": {
+            "assemblyVersion": "2.2.0.0",
+            "fileVersion": "2.2.0.18315"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/Microsoft.Extensions.FileProviders.Embedded.dll": {}
         }
       },
       "Microsoft.Extensions.FileProviders.Physical/2.2.0": {
@@ -4067,6 +4128,13 @@
       "path": "microsoft.aspnetcore.identity.entityframeworkcore/2.2.0",
       "hashPath": "microsoft.aspnetcore.identity.entityframeworkcore.2.2.0.nupkg.sha512"
     },
+    "Microsoft.AspNetCore.Identity.UI/2.2.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-GkFgQmYapCkzbk2Vp/OZsFdpS0PEzmLTHgv9g54Og2dVLFa+WF4WmCst1emskn9Iu32bB72oPi/K5onpzlB+vw==",
+      "path": "microsoft.aspnetcore.identity.ui/2.2.0",
+      "hashPath": "microsoft.aspnetcore.identity.ui.2.2.0.nupkg.sha512"
+    },
     "Microsoft.AspNetCore.JsonPatch/2.2.0": {
       "type": "package",
       "serviceable": true,
@@ -4284,6 +4352,13 @@
       "path": "microsoft.aspnetcore.server.kestrel.transport.sockets/2.2.0",
       "hashPath": "microsoft.aspnetcore.server.kestrel.transport.sockets.2.2.0.nupkg.sha512"
     },
+    "Microsoft.AspNetCore.StaticFiles/2.2.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-7cgW0CpNCaanY2eyanCHRH8Dvm7wPvHzgNlcZKPE9iQnelW7S4PQkijH7vLXqJrqHHuGl1RcQxqFvUncSJBXNg==",
+      "path": "microsoft.aspnetcore.staticfiles/2.2.0",
+      "hashPath": "microsoft.aspnetcore.staticfiles.2.2.0.nupkg.sha512"
+    },
     "Microsoft.AspNetCore.TestHost/2.2.0": {
       "type": "package",
       "serviceable": true,
@@ -4493,6 +4568,13 @@
       "sha512": "sha512-ztUs3ENypYt7tBh2hS1Vaq0kaJ3AoA6FERfFvK9chdQtk3KW7PfcDsJ14/q6JsEiPhLdtM8x1Afod+dNfaD3iA==",
       "path": "microsoft.extensions.fileproviders.composite/2.2.0",
       "hashPath": "microsoft.extensions.fileproviders.composite.2.2.0.nupkg.sha512"
+    },
+    "Microsoft.Extensions.FileProviders.Embedded/2.2.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-I4J9TrLvL9LiC02ZXcqGXrDXwhtvAEe6V19DpWFrgEw5OxIVpxd4HXr7oOGHUkfC1NTaohGI9Uzble2BV+sUPQ==",
+      "path": "microsoft.extensions.fileproviders.embedded/2.2.0",
+      "hashPath": "microsoft.extensions.fileproviders.embedded.2.2.0.nupkg.sha512"
     },
     "Microsoft.Extensions.FileProviders.Physical/2.2.0": {
       "type": "package",

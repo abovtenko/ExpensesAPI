@@ -11,6 +11,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using ExpensesCoreAPI.Filters;
 
 namespace ExpensesCoreAPI
 {
@@ -37,6 +38,7 @@ namespace ExpensesCoreAPI
             services.AddScoped<IService<Transaction>, TransactionService>();
             services.AddScoped<IService<Account>, AccountService>();
             services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped<ModelValidationFilter<Transaction>>();
             services.AddDefaultIdentity<AppUser>()
                 .AddEntityFrameworkStores<ExpensesContext>();
 

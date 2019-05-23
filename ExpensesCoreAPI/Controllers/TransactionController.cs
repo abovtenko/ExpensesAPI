@@ -1,4 +1,5 @@
-﻿using ExpensesCoreAPI.Models;
+﻿using ExpensesCoreAPI.Filters;
+using ExpensesCoreAPI.Models;
 using ExpensesCoreAPI.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,7 +16,7 @@ namespace ExpensesCoreAPI.Controllers
             _transactionService = service;
         }
 
-        [Route("")]
+        [Route("")]        
         public IActionResult GetAll([FromQuery] int? pageNumber, [FromQuery] int? pageSize)
         {
             var result = PaginationService.GetPagination(_transactionService.GetQueryable(), pageNumber ?? 0, pageSize ?? 50);
@@ -36,13 +37,9 @@ namespace ExpensesCoreAPI.Controllers
 
         [HttpPost]
         [Route("")]
-        public IActionResult Post([FromBody]Transaction model)
+        [ServiceFilter(typeof(ModelValidationFilter<Transaction>))]
+        public IActionResult Post([FromBody] Transaction model)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest();                
-            }
-
             _transactionService.Create(model);
             _transactionService.Save();
 
@@ -51,13 +48,9 @@ namespace ExpensesCoreAPI.Controllers
 
         [HttpPut]
         [Route("")]
+        [ServiceFilter(typeof(ModelValidationFilter<Transaction>))]
         public IActionResult Put([FromBody] Transaction model)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest();
-            }
-
             _transactionService.Update(model);
             _transactionService.Save();
 

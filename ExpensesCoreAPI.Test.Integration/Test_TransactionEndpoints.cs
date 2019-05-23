@@ -70,6 +70,23 @@ namespace ExpensesCoreAPI.Test.Integration
         }
 
         [Theory]
+        [InlineData("api/transactions/", "")]
+        [InlineData("api/transactions/", "{}")]
+        [InlineData("api/transactions/", "{ nokey: 0 }")]
+        [InlineData("api/transactions/", "7")]
+        [InlineData("api/transactions/", null)]
+        [InlineData("api/transactions/", 7)]
+        public async Task Post_Transaction_WithBadDataReturnsBadRequest(string url, object data)
+        {            
+            var content = new StringContent(JsonConvert.SerializeObject(data));
+            content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+            var response = await _client.PostAsync(url, content);
+
+            Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+        }
+
+        [Theory]
         [InlineData("api/transactions/")]
         public async Task Put_Transaction_ReturnsCorrectResponseProperties(string url)
         {
@@ -105,5 +122,6 @@ namespace ExpensesCoreAPI.Test.Integration
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             Assert.Single(actualResult);
         }
+
     }
 }

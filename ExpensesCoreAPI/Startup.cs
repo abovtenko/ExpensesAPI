@@ -39,6 +39,7 @@ namespace ExpensesCoreAPI
             services.AddScoped<IService<Account>, AccountService>();
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<ModelValidationFilter<Transaction>>();
+            services.AddScoped<PaginationFilter>();
             services.AddDefaultIdentity<AppUser>()
                 .AddEntityFrameworkStores<ExpensesContext>();
 
